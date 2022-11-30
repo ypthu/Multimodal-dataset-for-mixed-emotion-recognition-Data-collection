@@ -1,1 +1,1 @@
-1
+This folder is used to store the recorded data of all participants.
