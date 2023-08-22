@@ -18,7 +18,7 @@ The data recording script is written with PsychoPy 2021.2.3 under Python 3.8. It
 
 ## Software and hardware
 1. EEG recording software: DSI-streamer [Download URL](https://wearablesensing.com/dsi-streamer/)
-2. EEG recording device: DSI-24 wireless dry electrode EEG cap produced by Neuracle.
+2. EEG recording device: DSI-24 wireless dry electrode EEG cap produced by Wearable Sensing.
 3. GSR&PPG recording device: Intelligent wristband (the Ergosensing wristband (ES1))) produced by BEIJING PSYCHTECH TECHNOLOGY CO., LTD.
 4. Camera: Built-in HD camera of a DELL Latitude 5420 PC.
 
