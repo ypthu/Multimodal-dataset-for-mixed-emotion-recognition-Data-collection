@@ -36,6 +36,7 @@ TYPE_QUESTIONNAIRE = 4
 PRACTICE_VID = 50
 REST_VID = 40
 RESTING_STATE_DUR = 60*3
+LANG='ch'
 
 
 triggerObj = None
@@ -670,7 +671,7 @@ def SendMarker(vid, marker, eeg=True):
         # triggerObj.send(marker)
         SendEegMarker(marker)
 
-def AmuseAndDisgust(win, rootpath, info1, vid, practice=False, img_path=os.path.join(rootpath, 'pics/scales4panas.png')):
+def AmuseAndDisgust(win, rootpath, info1, vid, practice=False, img_path=os.path.join(rootpath, 'pics/'+LANG+'/scales4panas.png')):
     emos = ['愉悦', '厌恶']
     trialNumber = list(range(len(emos)))
 
@@ -715,7 +716,7 @@ def AmuseAndDisgust(win, rootpath, info1, vid, practice=False, img_path=os.path.
 
 
 # PANAS 测试
-def Adjective(win, rootpath, info1, vid, practice=False, img_path=os.path.join(rootpath, 'pics/scales4panas-bg.png')):
+def Adjective(win, rootpath, info1, vid, practice=False, img_path=os.path.join(rootpath, 'pics/'+LANG+'/scales4panas-bg.png')):
     # dataFile2 = open('data/'+ "%s.csv"%(info2['num']+'_'+info2['equipment']+'_'+info2['time']+'_'+info2['name']+'_'+info2['gender']+'_'+info2['handedness']), 'a')
     # adj = ['开心的', '恐惧的', ' 悲伤的']
     # adj = [u'感兴趣的', u'心烦的', u'精神活力高的', u'心神不宁的', u'劲头足的', u'内疚的', u'恐惧的', u'敌意的', u'热情的', u'自豪的', u'易怒的',
@@ -853,8 +854,8 @@ def MainProcess():
 
 
     # practice stage
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'practice_instructions.png'), 'waitkey': ['space']})
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'Instructions-excerpt.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'practice_instructions.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'Instructions-excerpt.png'), 'waitkey': ['space']})
     if not DEBUG:
         mqtt.setMarker(PRACTICE_VID + 10)
         SendMarker(PRACTICE_VID, PRACTICE_VID + 10)
@@ -866,29 +867,29 @@ def MainProcess():
         SendMarker(PRACTICE_VID, PRACTICE_VID + 100)
 
     # panas
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'PANASInstruction-v3.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'PANASInstruction-v3.png'), 'waitkey': ['space']})
     Adjective(win, rootpath, info, int(PRACTICE_VID), practice=True)
 
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'practice-arousal.png'), 'waitkey': ['space']})
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'ArousalPic.png'),
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'practice-arousal.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'ArousalPic.png'),
                                 'waitkey': ['1', '2', '3', '4', '5', '6', '7', '8', '9']})
     # ShowText(win, {'text': '+', 'lasttime': 1})
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'practice-valence.png'), 'waitkey': ['space']})
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'ValencePic.png'),
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'practice-valence.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'ValencePic.png'),
                                 'waitkey': ['1', '2', '3', '4', '5', '6', '7', '8', '9']})
     # ShowText(win, {'text': '+', 'lasttime': 1})
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'practice-dominance.png'), 'waitkey': ['space']})
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'Dominance.png'),
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'practice-dominance.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'Dominance.png'),
                                   'waitkey': ['1', '2', '3', '4', '5', '6', '7', '8', '9']})
     # Amusement and Repulsion
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'DiscreteEmosInstruction.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'DiscreteEmosInstruction.png'), 'waitkey': ['space']})
     AmuseAndDisgust(win, rootpath, info, int(PRACTICE_VID), practice=True)
 
     # math calculation
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'MathInstruction.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'MathInstruction.png'), 'waitkey': ['space']})
     Caluate(win, df)
 
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'practice-end.png'), 'waitkey': ['space']})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'practice-end.png'), 'waitkey': ['space']})
 
     core.quit()
 
@@ -897,7 +898,7 @@ def MainProcess():
     if not DEBUG:
         mqtt.setMarker(REST_VID + 10)
         SendMarker(REST_VID, REST_VID + 10)
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'reststate-instruction.png'), 'lasttime': RESTING_STATE_DUR})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'reststate-instruction.png'), 'lasttime': RESTING_STATE_DUR})
     if not DEBUG:
         mqtt.setMarker(REST_VID + 100)
         SendMarker(REST_VID, REST_VID + 100)
@@ -940,7 +941,7 @@ def MainProcess():
         # run a trial
         for vid in video_inds:
             # show instruction
-            ShowImg(win, {'filename':os.path.join(rootpath, 'pics', 'Instructions-excerpt-auto.png'), 'lasttime':3})
+            ShowImg(win, {'filename':os.path.join(rootpath, 'pics/'+LANG+'/', 'Instructions-excerpt-auto.png'), 'lasttime':3})
 
             # play video trigger
             if not DEBUG:
@@ -954,41 +955,41 @@ def MainProcess():
                 SendMarker(vid, vid + 100)
 
             # Panas
-            ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'PANASInstruction-auto.png'), 'lasttime': 3})
+            ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'PANASInstruction-auto.png'), 'lasttime': 3})
             Adjective(win, rootpath, info, int(vid))
 
             # Valence/Arousal/Dominant
-            ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'Instructions-avd-auto.png'), 'lasttime': 3})
-            key_arousal = ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'ArousalPic.png'),
+            ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'Instructions-avd-auto.png'), 'lasttime': 3})
+            key_arousal = ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'ArousalPic.png'),
                                         'waitkey': ['1', '2', '3', '4', '5', '6', '7', '8', '9']})
             ShowText(win, {'text': '+', 'lasttime': 1})
-            key_valence = ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'ValencePic.png'),
+            key_valence = ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'ValencePic.png'),
                                         'waitkey': ['1', '2', '3', '4', '5', '6', '7', '8', '9']})
             ShowText(win, {'text': '+', 'lasttime': 1})
-            key_dominance = ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'Dominance.png'),
+            key_dominance = ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'Dominance.png'),
                                           'waitkey': ['1', '2', '3', '4', '5', '6', '7', '8', '9']})
             WriteRow(os.path.join(rootpath, 'subjects', info['No'], 'Arousal_Valence.csv'),
                      [vid, int(key_arousal), int(key_valence), int(key_dominance)])
 
             # Amusement and Repulsion
-            ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'DiscreteEmosInstruction-auto.png'), 'lasttime': 3})
+            ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'DiscreteEmosInstruction-auto.png'), 'lasttime': 3})
             AmuseAndDisgust(win, rootpath, info, int(vid))
 
             # rest
-            ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'rest-5s.png'), 'lasttime': 5})
+            ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'rest-5s.png'), 'lasttime': 5})
 
         if block != blocks[-1]:
             # math calculation
-            ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'MathInstruction.png'), 'waitkey': ['space']})
+            ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'MathInstruction.png'), 'waitkey': ['space']})
             Caluate(win, df)
             # rest
-            ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'rest-60s.png'), 'lasttime': 60})
-            ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'goon.png'), 'waitkey': ['space']})
+            ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'rest-60s.png'), 'lasttime': 60})
+            ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'goon.png'), 'waitkey': ['space']})
 
         # block end trigger
 
     # prepare for exiting
-    ShowImg(win, {'filename': os.path.join(rootpath, 'pics', 'end.png'), 'lasttime': 10})
+    ShowImg(win, {'filename': os.path.join(rootpath, 'pics/'+LANG+'/', 'end.png'), 'lasttime': 10})
     # core.wait(10)
     if not DEBUG:
         mqtt.loop_stop()
